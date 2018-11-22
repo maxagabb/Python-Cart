@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/styles/mycss.css">
+</head>
+<body>
+    <div class="container">
+        <center>
+            <h1>Product Listing Database</h1>
+            <div class="row">
+                {% if cart %}
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"id="cart">
+                    <img src="/static/images/cartIcon.png" alt="Smiley face" width="150"><img /><br>
+                    <button class="button" onclick="window.location.href = '/cart';">GoTo Cart</button>
+                </div>
+                <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4"id="cart">
+                    <h2>Items: </h2>
+                    {% for data in cart %}
+                    <p>{{data.product.name}}: {{data.quantity}}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4"id="cart">
+                    <h2>Total: </h2><p>${{cart.getTotal()}}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if content %}
+                <h2>Products By Category</h2>
+                <ul>
+                    {% for data in content %}
+                    <li><a href="/products/{{data.ID}}">{{data.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                <button onclick="window.location.href = '/products';">All Products</button>
+                {% endif %}
+            </div>
+        </center>
+        </div>
+</body>
+{% endblock %}

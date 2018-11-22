@@ -1,0 +1,49 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+{% import "bootstrap/utils.html" as util %}
+{% import "header.html" as header%}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% block content %}
+<center>
+    <div class="container">
+        {{util.flashed_messages(dismissible=True)}}
+        {{header}}
+        <h1>Thank You For Your Purchase!</h1>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 mark">
+                <h2>Receipt </h2>
+                {% for data in cart %}
+                <div class="row">
+                    <div class ="col-lg-8 col-md-8" id="product">
+                        <p>{{data.product.name}}: {{data.quantity}}
+                    </div>
+                    <div class="col-lg-4 col-md-4" id="total">
+                        <p>${{data.getTotal()}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row">
+                    <p>Total: ${{cart.getTotal()}}</p>
+                </div>
+            </div>
+            </div>
+
+        {% for row in cart | batch(1) %}
+        <div class="row">
+            {% for data in row %}
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <img src="/static/images/{{data.product.img}}" alt="productImage" height="250" width="200">
+                <p class="mark" style="position: relative;">{{data.product.name}}<br>Quantiy: {{data.quantity}}<br />${{data.getTotal()}}</p>
+                <br /><br /><br />
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</center>
+    {% endblock %}
+

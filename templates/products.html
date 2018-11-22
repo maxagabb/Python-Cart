@@ -1,0 +1,62 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+{% import "bootstrap/utils.html" as util %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/styles/mycss.css">
+</head>
+<div class="container">
+    <center>
+        {{util.flashed_messages(dismissible=True)}}
+        <h1>Product Listing Database</h1>
+        <div class="row">
+            {% if cart %}
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4" id="cart">
+                <img src="/static/images/cartIcon.png" alt="Smiley face" width="150"><img /><br>
+                {% if not cartPage %}
+                <button class="button" onclick="window.location.href = '/cart';">GoTo Cart</button>
+                {% endif %}
+                {% if cartPage %}
+                <button class="button" onclick="window.location.href = '/checkout';">Checkout</button>
+                {% endif %}
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4" id="cart">
+                <h2>Items: </h2>
+                {% for data in cart %}
+                <p>{{data.product.name}}: {{data.quantity}}</p>
+                {% endfor %}
+            </div>
+            <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4" id="cart">
+                <h2>Total: </h2><p>${{cart.getTotal()}}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <h2>Products By Category</h2>
+        <ul>
+            {% for data in content2 %}
+            <li><a href="/products/{{data.ID}}">{{data.name}}</a></li>
+            {% endfor %}
+            <li><button onclick="window.location.href = '/products';">All Products</button></li>
+        </ul>
+        {% for row in content | batch(3) %}
+        <div class="row-fluid">
+            {% for data in row %}
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <p class="mark" style="position: relative;">{{data.name}}<br>${{data.price}}<br />{{data.discountPercent}}% Off!</p>
+                <img src="/static/images/{{data.img}}" alt="productImage" height="250" width="200">
+                <form method="POST">
+                    <button class="button" name="Add_To_Cart" value={{data.id}} type="submit" formmethod="post">Add To Cart</button>
+                    <button class="button2" name="Remove_From_Cart" value={{data.id}} type="submit" formmethod="post">Remove</button>
+                </form>
+                <br /><br /><br />
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </center>
+
+</div>
+{% endblock %}

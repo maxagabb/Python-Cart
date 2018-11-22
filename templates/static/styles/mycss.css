@@ -1,0 +1,100 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+
+div {
+    position: relative;
+}
+
+p {
+    font-weight: 900;
+}
+
+div {
+    position: relative;
+}
+
+#cart {
+    background-color: azure;
+}
+
+#product {
+    float: left;
+}
+
+#total {
+    float: right;
+}
+
+mark {
+    background-color: yellow;
+    color: black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightblue;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button2 {
+    background-color: #f44842; /* Red */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+/* Create three equal columns that floats next to each other */
+.column2 {
+    background-color: azure;
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+.col {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
